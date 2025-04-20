@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Oliver & Aang Roleplay Chat</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+    }
+    /* Scrollbar for chat */
+    #chatMessages {
+      scrollbar-width: thin;
+      scrollbar-color: #a0aec0 transparent;
+    }
+    #chatMessages::-webkit-scrollbar {
+      width: 8px;
+    }
+    #chatMessages::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    #chatMessages::-webkit-scrollbar-thumb {
+      background-color: #a0aec0;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+  <header class="bg-blue-600 text-white p-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold">Oliver & Aang Roleplay</h1>
+    <button id="memoryToggleBtn" aria-label="Toggle Memory Panel" class="text-white hover:text-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-300 rounded">
+      <i class="fas fa-book-open fa-lg"></i>
+    </button>
+  </header>
+
+  <main class="flex-1 flex flex-col md:flex-row overflow-hidden">
+    <!-- Chat area -->
+    <section class="flex-1 flex flex-col p-4 max-h-screen">
+      <div id="chatMessages" class="flex-1 overflow-y-auto mb-4 space-y-4 p-2 bg-white rounded shadow">
+        <!-- Chat messages will appear here -->
+      </div>
+      <form id="chatForm" class="flex space-x-2">
+        <input
+          id="chatInput"
+          type="text"
+          placeholder="Speak as Oliver..."
+          aria-label="Type your message"
+          class="flex-1 rounded border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          autocomplete="off"
+          required
+        />
+        <button
+          type="submit"
+          class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          aria-label="Send message"
+        >
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </form>
+    </section>
+
+    <!-- Memory panel -->
+    <aside
+      id="memoryPanel"
+      class="hidden md:block w-80 bg-white border-l border-gray-300 p-4 overflow-y-auto max-h-screen"
+      aria-label="Memory folders and scenes"
+    >
+      <h2 class="text-lg font-semibold mb-4">Memory Folders</h2>
+      <div id="foldersList" class="space-y-3">
+        <!-- Folder list will be rendered here -->
+      </div>
+      <button
+        id="addFolderBtn"
+        class="mt-4 w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+        aria-label="Add new memory folder"
+      >
+        <i class="fas fa-folder-plus mr-2"></i> Add Folder
+      </button>
+    </aside>
+  </main>
+
+  <!-- Scene modal -->
+  <div
+    id="sceneModal"
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="sceneModalTitle"
+  >
+    <div class="bg-white rounded-lg shadow-lg max-w-lg w-full p-6 relative">
+      <h3 id="sceneModalTitle" class="text-xl font-bold mb-4">Scene</h3>
+      <form id="sceneForm" class="flex flex-col space-y-4">
+        <label for="sceneTitle" class="font-semibold">Title</label>
+        <input
+          type="text"
+          id="sceneTitle"
+          name="sceneTitle"
+          class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+        />
+        <label for="sceneText" class="font-semibold">Scene Text</label>
+        <textarea
+          id="sceneText"
+          name="sceneText"
+          rows="6"
+          class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-y"
+          required
+        ></textarea>
+        <div class="flex justify-end space-x-2">
+          <button
+            type="button"
+            id="cancelSceneBtn"
+            class="px-4 py-2 rounded border border-gray-300 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            Save
+          </button>
+        </div>
+      </form>
+      <button
+        id="closeSceneModalBtn"
+        aria-label="Close scene modal"
+        class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 focus:outline-none"
+      >
+        <i class="fas fa-times fa-lg"></i>
+      </button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
